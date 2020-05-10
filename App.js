@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { AppLoading } from "expo";
-import { bootstrap } from "./src/bootstrap";
+import * as React from "react";
+import { View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import MainScreen from "./src/screens/MainScreen";
 import { AppNavigation } from "./src/navigation/AppNavigation";
 
-export default function App() {
-  const [isReady, setIsReady] = useState(false);
-
-  // preloader function
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={bootstrap}
-        onFinish={() => setIsReady(true)}
-        onError={(err) => console.log(err)}
-      />
-    );
-  }
-
+function App() {
   return <AppNavigation />;
 }
 
-const styles = StyleSheet.create({});
+export default App;
