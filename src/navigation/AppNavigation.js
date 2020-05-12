@@ -11,27 +11,11 @@ import PhotoIcon from "../components/PhotoIcon";
 import BookedIcon from "../components/BookedIcon";
 import BurgerIcon from "../components/BurgerIcon";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const BottomTabs = createBottomTabNavigator();
+const BottomTabsNavigator = createBottomTabNavigator();
 const PostNavigator = createStackNavigator();
+
 const PostNavigatorContainer = () => (
   <PostNavigator.Navigator
     // default settings for header
@@ -65,15 +49,38 @@ const PostNavigatorContainer = () => (
   </PostNavigator.Navigator>
 );
 
+const BookedPostNavigatorContainer = () => (
+  <PostNavigator.Navigator
+    // default settings for header
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: THEME.MAIN_COLOR,
+      },
+      headerTintColor: "#fff",
+    }}
+  >
+    <PostNavigator.Screen
+      name="Main"
+      component={BookedScreen}
+      options={{
+        title: "Избранное",
+      }}
+    />
+  </PostNavigator.Navigator>
+);
+
 export const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <BottomTabs.Navigator
+      <BottomTabsNavigator.Navigator
         tabBarOptions={{
           activeTintColor: THEME.MAIN_COLOR,
+          headerStyle: {
+            backgroundColor: THEME.MAIN_COLOR,
+          },
         }}
       >
-        <BottomTabs.Screen
+        <BottomTabsNavigator.Screen
           name="POST"
           component={PostNavigatorContainer}
           options={{
@@ -83,17 +90,18 @@ export const AppNavigation = () => {
             ),
           }}
         />
-        <BottomTabs.Screen
+        <BottomTabsNavigator.Screen
           name="BOOKED"
-          component={SettingsScreen}
+          component={BookedPostNavigatorContainer}
           options={{
-            tabBarLabel: "ЗАКЛАДКИ",
+            title: "Избранное",
+            tabBarLabel: "ИЗБРАННОЕ",
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="star" size={size} color={color} />
             ),
           }}
         />
-      </BottomTabs.Navigator>
+      </BottomTabsNavigator.Navigator>
     </NavigationContainer>
   );
 };

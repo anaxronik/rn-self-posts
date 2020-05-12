@@ -1,15 +1,32 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import { DATA } from "../data";
+import Post from "../components/Post";
 
-const BookedScreen = () => {
+const MainScreen = ({ navigation }) => {
+  const goToPost = (post) => {
+    navigation.navigate("Post", {
+      postID: post.id,
+      postTitle: `Пост от ${new Date(post.date).toLocaleDateString()}`,
+      postIsBooked: post.booked,
+    });
+  };
+
   return (
-    <View style={styles.center}>
-      <Text>BookedScreen</Text>
+    <View style={styles.wrapper}>
+      <FlatList
+        data={DATA.filter((post) => post.booked)}
+        keyExtractor={(post) => post.id.toString()}
+        renderItem={({ item }) => <Post post={item} onOpen={goToPost} />}
+      />
     </View>
   );
 };
 
-export default BookedScreen;
+MainScreen.title = "Мой блог";
+
+export default MainScreen;
 
 const styles = StyleSheet.create({
   center: {
@@ -17,4 +34,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  wrapper: { padding: 10 },
 });
