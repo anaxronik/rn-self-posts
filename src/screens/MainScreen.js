@@ -1,5 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import { DATA } from "../data";
+import Post from "../components/Post";
 
 const MainScreen = ({ navigation }) => {
   const goToPost = (params) => {
@@ -8,9 +11,12 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.center}>
-      <Text>MainScreen</Text>
-      <Button title="GO TO POST" onPress={goToPost} />
+    <View style={styles.wrapper}>
+      <FlatList
+        data={DATA}
+        keyExtractor={(post) => post.id.toString()}
+        renderItem={({ item }) => <Post post={item} />}
+      />
     </View>
   );
 };
@@ -25,4 +31,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  wrapper: { padding: 10 },
 });
