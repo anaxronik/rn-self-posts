@@ -15,6 +15,8 @@ const MainScreen = ({ navigation }) => {
   );
 };
 
+MainScreen.title = "Мой блог";
+
 export default MainScreen;
 
 const styles = StyleSheet.create({

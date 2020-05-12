@@ -6,23 +6,35 @@ import PostScreen from "../screens/PostScreen";
 import AboutScreen from "../screens/AboutScreen";
 import CreateScreen from "../screens/CreateScreen";
 import BookedScreen from "../screens/BookedScreen";
+import { THEME } from "../theme";
 
-const Stack = createStackNavigator();
+const PostNavigator = createStackNavigator();
 
 export const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+      <PostNavigator.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: THEME.MAIN_COLOR,
+          },
+          headerTintColor: "#fff",
+        }}
+      >
+        <PostNavigator.Screen
           name="Main"
           component={MainScreen}
-          options={{ title: "Мой блог" }}
+          options={{ title: "Главный экран" }}
         />
-        <Stack.Screen name="Post" component={PostScreen} />
-        <Stack.Screen name="About" component={AboutScreen} />
-        <Stack.Screen name="Create" component={CreateScreen} />
-        <Stack.Screen name="Booked" component={BookedScreen} />
-      </Stack.Navigator>
+        <PostNavigator.Screen
+          name="Post"
+          component={PostScreen}
+          options={{ title: PostScreen.title }}
+        />
+        <PostNavigator.Screen name="About" component={AboutScreen} />
+        <PostNavigator.Screen name="Create" component={CreateScreen} />
+        <PostNavigator.Screen name="Booked" component={BookedScreen} />
+      </PostNavigator.Navigator>
     </NavigationContainer>
   );
 };

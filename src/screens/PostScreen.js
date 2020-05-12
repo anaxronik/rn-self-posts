@@ -9,6 +9,8 @@ const PostScreen = () => {
   );
 };
 
+PostScreen.title = `пост № ${Date.now()}`;
+
 export default PostScreen;
 
 const styles = StyleSheet.create({
