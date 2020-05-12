@@ -9,6 +9,7 @@ import BookedScreen from "../screens/BookedScreen";
 import { THEME } from "../theme";
 import PhotoIcon from "../components/PhotoIcon";
 import BookedIcon from "../components/BookedIcon";
+import BurgerIcon from "../components/BurgerIcon";
 
 const PostNavigator = createStackNavigator();
 
@@ -30,15 +31,18 @@ export const AppNavigation = () => {
           options={{
             title: "Главный экран",
             headerRight: () => <PhotoIcon />,
+            headerLeft: () => <BurgerIcon />,
           }}
         />
         <PostNavigator.Screen
           name="Post"
           component={PostScreen}
-          options={{
-            title: "Главный экран",
-            headerRight: () => <BookedIcon />,
-          }}
+          options={({ route }) => ({
+            title: route.params.postTitle,
+            headerRight: () => (
+              <BookedIcon booked={route.params.postIsBooked} />
+            ),
+          })}
         />
         <PostNavigator.Screen name="About" component={AboutScreen} />
         <PostNavigator.Screen name="Create" component={CreateScreen} />

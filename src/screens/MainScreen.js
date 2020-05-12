@@ -6,8 +6,11 @@ import Post from "../components/Post";
 
 const MainScreen = ({ navigation }) => {
   const goToPost = (post) => {
-    console.log("goToPost", navigation.navigate);
-    navigation.navigate("Post", { postID: post.id });
+    navigation.navigate("Post", {
+      postID: post.id,
+      postTitle: `Пост от ${new Date(post.date).toLocaleDateString()}`,
+      postIsBooked: post.booked,
+    });
   };
 
   return (
