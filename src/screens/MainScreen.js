@@ -5,9 +5,9 @@ import { DATA } from "../data";
 import Post from "../components/Post";
 
 const MainScreen = ({ navigation }) => {
-  const goToPost = (params) => {
+  const goToPost = (post) => {
     console.log("goToPost", navigation.navigate);
-    navigation.navigate("Post");
+    navigation.navigate("Post", { postID: post.id });
   };
 
   return (
@@ -15,7 +15,7 @@ const MainScreen = ({ navigation }) => {
       <FlatList
         data={DATA}
         keyExtractor={(post) => post.id.toString()}
-        renderItem={({ item }) => <Post post={item} />}
+        renderItem={({ item }) => <Post post={item} onOpen={goToPost} />}
       />
     </View>
   );

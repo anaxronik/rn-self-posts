@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Post = ({ post }) => {
+const Post = ({ post, onOpen }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("onPress POST", post.id);
+        onOpen(post);
       }}
     >
       <View style={styles.post}>
