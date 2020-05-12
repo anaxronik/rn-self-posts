@@ -7,6 +7,8 @@ import AboutScreen from "../screens/AboutScreen";
 import CreateScreen from "../screens/CreateScreen";
 import BookedScreen from "../screens/BookedScreen";
 import { THEME } from "../theme";
+import PhotoIcon from "../components/PhotoIcon";
+import { Button, Text } from "react-native";
 
 const PostNavigator = createStackNavigator();
 
@@ -14,6 +16,7 @@ export const AppNavigation = () => {
   return (
     <NavigationContainer>
       <PostNavigator.Navigator
+        // default settings for header
         screenOptions={{
           headerStyle: {
             backgroundColor: THEME.MAIN_COLOR,
@@ -24,7 +27,10 @@ export const AppNavigation = () => {
         <PostNavigator.Screen
           name="Main"
           component={MainScreen}
-          options={{ title: "Главный экран" }}
+          options={{
+            title: "Главный экран",
+            headerRight: () => <PhotoIcon />,
+          }}
         />
         <PostNavigator.Screen
           name="Post"
