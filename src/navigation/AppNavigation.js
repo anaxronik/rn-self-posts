@@ -8,7 +8,7 @@ import CreateScreen from "../screens/CreateScreen";
 import BookedScreen from "../screens/BookedScreen";
 import { THEME } from "../theme";
 import PhotoIcon from "../components/PhotoIcon";
-import { Button, Text } from "react-native";
+import BookedIcon from "../components/BookedIcon";
 
 const PostNavigator = createStackNavigator();
 
@@ -35,7 +35,10 @@ export const AppNavigation = () => {
         <PostNavigator.Screen
           name="Post"
           component={PostScreen}
-          options={{ title: PostScreen.title }}
+          options={{
+            title: "Главный экран",
+            headerRight: () => <BookedIcon />,
+          }}
         />
         <PostNavigator.Screen name="About" component={AboutScreen} />
         <PostNavigator.Screen name="Create" component={CreateScreen} />
